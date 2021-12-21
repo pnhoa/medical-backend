@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name= "category")
 @JsonIgnoreProperties("products")
-public class CategoryEntity extends BaseEntity {
+public class Category extends BaseEntity {
 	
 	@Column(name = "code", columnDefinition = "varchar(50)", nullable = false)
 	private String code;
@@ -24,7 +24,7 @@ public class CategoryEntity extends BaseEntity {
 	
 	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("category")
-	Set<ProductEntity> products;
+	Set<Product> products;
 
 	public String getCode() {
 		return code;
@@ -43,15 +43,15 @@ public class CategoryEntity extends BaseEntity {
 	}
 	
 
-	public Set<ProductEntity> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<ProductEntity> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 
-	public CategoryEntity() {
+	public Category() {
 		super();
 	}
 	

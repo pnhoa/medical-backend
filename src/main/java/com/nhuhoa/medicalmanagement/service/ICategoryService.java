@@ -3,17 +3,17 @@ package com.nhuhoa.medicalmanagement.service;
 import java.util.List;
 import java.util.Map;
 
-import com.nhuhoa.medicalmanagement.entity.CategoryEntity;
+import com.nhuhoa.medicalmanagement.entity.Category;
 
 public interface ICategoryService {
 	
 	Map<String, String> findAllReturnMap();
 	
-	List<CategoryEntity> findAll();
+	List<Category> findAll();
 	
-	CategoryEntity findById(Long theId);
+	Category findById(Long theId);
 	
-	CategoryEntity findByCode(String theCode);
+	Category findByCode(String theCode);
 	
 
 }

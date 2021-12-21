@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.nhuhoa.medicalmanagement.dto.MessageResponse;
 import com.nhuhoa.medicalmanagement.dto.ProductDto;
-import com.nhuhoa.medicalmanagement.entity.ProductEntity;
+import com.nhuhoa.medicalmanagement.entity.Product;
 
 
 public interface IProductService {
 	
-	List<ProductEntity> findAll();
+	List<Product> findAll();
 	
-	ProductEntity findById(Long theId);
+	Product findById(Long theId);
 	
 	MessageResponse createProduct(ProductDto theProductDto);
 	
@@ -19,7 +19,7 @@ public interface IProductService {
 	
 	void deleteProduct(Long theId);
 
-	List<ProductEntity> search(String key);
+	List<Product> search(String key);
 	
 	
 

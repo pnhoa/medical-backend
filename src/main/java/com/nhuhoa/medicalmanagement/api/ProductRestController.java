@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nhuhoa.medicalmanagement.dto.MessageResponse;
 import com.nhuhoa.medicalmanagement.dto.ProductDto;
-import com.nhuhoa.medicalmanagement.entity.ProductEntity;
+import com.nhuhoa.medicalmanagement.entity.Product;
 import com.nhuhoa.medicalmanagement.service.IProductService;
 
 @RestController
 @RequestMapping("/api/products")
+@PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
 @CrossOrigin
 public class ProductRestController {
 	
@@ -37,26 +39,26 @@ public class ProductRestController {
 	}
 	
 	@GetMapping("")
-	public ResponseEntity<List<ProductEntity>> findAll(){
+	public ResponseEntity<List<Product>> findAll(){
 		
-		List<ProductEntity> theProducts = productService.findAll();
+		List<Product> theProducts = productService.findAll();
 		
 		return new ResponseEntity<>(theProducts, HttpStatus.OK);
 		
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ProductEntity> findById(@PathVariable("id") Long theId){
+	public ResponseEntity<Product> findById(@PathVariable("id") Long theId){
 		
-		ProductEntity theProduct = productService.findById(theId);
+		Product theProduct = productService.findById(theId);
 		
-		return new ResponseEntity<ProductEntity>(theProduct, HttpStatus.OK);
+		return new ResponseEntity<Product>(theProduct, HttpStatus.OK);
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<ProductEntity>> searchProducts(@RequestParam(name="key", required = false) String key){
+	public ResponseEntity<List<Product>> searchProducts(@RequestParam(name="key", required = false) String key){
 		
-		List<ProductEntity> theProducts = productService.search(key);
+		List<Product> theProducts = productService.search(key);
 		
 		return new ResponseEntity<>(theProducts, HttpStatus.OK);
 		

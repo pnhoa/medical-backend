@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nhuhoa.medicalmanagement.dto.MessageResponse;
 import com.nhuhoa.medicalmanagement.dto.ProductDto;
-import com.nhuhoa.medicalmanagement.entity.ProductEntity;
+import com.nhuhoa.medicalmanagement.entity.Product;
 import com.nhuhoa.medicalmanagement.exception.ResourceNotFoundException;
 import com.nhuhoa.medicalmanagement.repository.ProductRepository;
 
@@ -30,20 +30,20 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public List<ProductEntity> findAll() {
+	public List<Product> findAll() {
 		
 		return productRepository.findAll();
 	}
 
 	@Override
-	public ProductEntity findById(Long theId) throws ResourceNotFoundException {
+	public Product findById(Long theId) throws ResourceNotFoundException {
 		
 		return productRepository.findById(theId).orElseThrow(() -> new ResourceNotFoundException("Not found product with ID=" + theId));
 	}
 
 	@Override
 	public MessageResponse createProduct(ProductDto theProductDto) {
-		ProductEntity theProduct = new ProductEntity();
+		Product theProduct = new Product();
 		
 		theProduct.setCode(theProductDto.getCode());
 		theProduct.setName(theProductDto.getName());
@@ -62,7 +62,7 @@ public class ProductService implements IProductService {
 	@Override
 	public MessageResponse updateProduct(Long theId, ProductDto theProductDto) throws ResourceNotFoundException {
 
-		Optional<ProductEntity> theProduct = productRepository.findById(theId);
+		Optional<Product> theProduct = productRepository.findById(theId);
 		
 		if(!theProduct.isPresent()) {
 			throw new ResourceNotFoundException("Not found product with ID=" + theId);
@@ -86,7 +86,7 @@ public class ProductService implements IProductService {
 	public void deleteProduct(Long theId) throws ResourceNotFoundException {
 
 		@SuppressWarnings("unused")
-		ProductEntity theProduct = productRepository.findById(theId).orElseThrow(
+		Product theProduct = productRepository.findById(theId).orElseThrow(
 				() -> new ResourceNotFoundException("Not found product with ID=" + theId));
 		
 		productRepository.delete(theProduct);
@@ -94,7 +94,7 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public List<ProductEntity> search(String key) {
+	public List<Product> search(String key) {
 		
 		key = key.toLowerCase();
 		

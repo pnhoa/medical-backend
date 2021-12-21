@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nhuhoa.medicalmanagement.entity.CategoryEntity;
+import com.nhuhoa.medicalmanagement.entity.Category;
 import com.nhuhoa.medicalmanagement.exception.ResourceNotFoundException;
 import com.nhuhoa.medicalmanagement.repository.CategoryRepository;
 
@@ -29,8 +29,8 @@ public class CategoryService implements ICategoryService {
 	public Map<String, String> findAllReturnMap() {
 		
 		Map<String, String> result = new HashMap<String, String>();
-		List<CategoryEntity> entities = categoryRepository.findAll();
-		for(CategoryEntity item: entities) {
+		List<Category> entities = categoryRepository.findAll();
+		for(Category item: entities) {
 			result.put(item.getCode(),item.getName());
 		}
 		return result;
@@ -38,21 +38,21 @@ public class CategoryService implements ICategoryService {
 
 
 	@Override
-	public List<CategoryEntity> findAll() {
+	public List<Category> findAll() {
 		
 		return categoryRepository.findAll();
 	}
 
 
 	@Override
-	public CategoryEntity findById(Long theId) throws ResourceNotFoundException{
+	public Category findById(Long theId) throws ResourceNotFoundException{
 		
 		return categoryRepository.findById(theId).orElseThrow(() -> new ResourceNotFoundException("Not found category with ID= " + theId));
 	}
 
 
 	@Override
-	public CategoryEntity findByCode(String theCode) {
+	public Category findByCode(String theCode) {
 
 		return categoryRepository.findByCode(theCode).orElseThrow(() -> new ResourceNotFoundException("Not found category with code= " + theCode));
 	}

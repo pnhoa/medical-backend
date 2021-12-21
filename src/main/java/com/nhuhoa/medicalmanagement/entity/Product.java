@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "product")
-public class ProductEntity extends BaseEntity {
+public class Product extends BaseEntity {
 	
 	@Column(name = "code", columnDefinition = "varchar(50)", nullable = false)
 	private String code;
@@ -33,7 +33,7 @@ public class ProductEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id")
 	@JsonIgnoreProperties("products")
-	private CategoryEntity category;
+	private Category category;
 	
 
 	public String getCode() {
@@ -76,15 +76,15 @@ public class ProductEntity extends BaseEntity {
 		this.quantity = quantity;
 	}
 
-	public CategoryEntity getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(CategoryEntity category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-	public ProductEntity() {
+	public Product() {
 		super();
 	}
 	

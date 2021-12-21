@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
 
-import com.nhuhoa.medicalmanagement.entity.CategoryEntity;
+import com.nhuhoa.medicalmanagement.entity.Category;
 
 
 public class ProductDto extends AbstractDto {
@@ -23,7 +23,7 @@ public class ProductDto extends AbstractDto {
 	@NotNull(message = "Please enter price")
 	private int quantity;
 	
-	private CategoryEntity category;
+	private Category category;
 	
 	private String categoryCode;
 	
@@ -69,11 +69,11 @@ public class ProductDto extends AbstractDto {
 		this.quantity = quantity;
 	}
 
-	public CategoryEntity getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(CategoryEntity category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	
